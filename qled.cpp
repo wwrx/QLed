@@ -62,6 +62,8 @@ void QLed::paintEvent(QPaintEvent*) {
   renderer->load(ledShapeAndColor);
   renderer->render(&painter);
 
+  if(!m_value && m_onColor == m_offColor)
+      painter.fillRect(this->rect(), QColor(0, 0, 0, 120));
 }
 
 
@@ -82,6 +84,18 @@ void QLed::setOnColor(ledColor newColor) {
   \return void
 */
 void QLed::setOffColor(ledColor newColor) {
+  m_offColor = newColor;
+  update();
+}
+
+
+/*!
+  \brief setColor: this method allows to change the On/Off color simultaneously {Red,Green,Yellow,Grey,Orange,Purple,blue}
+  \param ledColor newColor
+  \return void
+*/
+void QLed::setColor(ledColor newColor) {
+  m_onColor = newColor;
   m_offColor = newColor;
   update();
 }

@@ -66,6 +66,7 @@ class MY_PLUGIN_EXPORT QLed : public QWidget {
   void setValue(bool);
   void setOnColor(ledColor);
   void setOffColor(ledColor);
+  void setColor(ledColor);
   void setShape(ledShape);
   void toggleValue();
 

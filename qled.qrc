@@ -27,7 +27,6 @@
         <file>resources/round_purple.svg</file>
         <file>resources/round_red.svg</file>
         <file>resources/round_yellow.svg</file>
-        <file>resources/qled.png</file>
         <file>resources/round_orange.svg</file>
     </qresource>
 </RCC>
