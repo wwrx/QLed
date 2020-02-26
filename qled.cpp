@@ -1,16 +1,19 @@
 /***************************************************************************
- *   Copyright (C) 2010 by P. Sereno                                       *
+ *   Copyright (C) 2020 by Adam Kisari                                     *
+ *   github.com/wwrx   or   kisari.net                                     *
+ *                                                                         *
+ *   This work is based on original work by P. Sereno (2010)               *
  *   http://www.sereno-online.com                                          *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU Lesser General Public License           *
- *   version 2.1 as published by the Free Software Foundation              *
+ *   version 3 as published by the Free Software Foundation                *
  *                                                                         *
  *   This program is distributed in the hope that it will be useful,       *
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
  *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
  *   GNU Lesser General Public License for more details.                   *
- *   http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.               *
+ *   https://www.gnu.org/licenses/lgpl-3.0.html                            *
  ***************************************************************************/
 
 #include <QColor>
