@@ -1,19 +1,14 @@
 # The QLed custom widget plugin
-
-[![Qt version](https://badge.fury.io/gh/qt/qt5.svg)](https://badge.fury.io/gh/qt/qt5)
-
 QLed is a custom widget plugin for Qt designer. 
 
 
 ## Installation
-INSTALLING your custom widget plugin
 1. Clone into a working directory
 2. Type qmake <qledplugin.pro>
 3. Type make
 4. Type make install
 5. That's all, your Qt custom widget plugin is installed. You can run Qt Designer
    and you will find the plugin icon in Designer left tollbar
-I hope you will enjoy using the plugin. Good luck!
 
 
 ## Usage
@@ -37,6 +32,7 @@ widget.setOffColor(QLed::ledColor::<your-choice>);
 widget.toggleValue();
 ```
 
+------------------------------------------------------------------------------
 The available shapes are:
 * Circle
 * Square
@@ -53,10 +49,15 @@ The available colours are:
 * Blue
 
 
-## Copyright
----------
+## Tested Platforms/Versions
+This module has been tested with the following configurations
+* Qt 5.14
+* Qt Creator 4.11
 
+
+## Copyright
 Copyright (C) 2020 by Adam Kisari
+
 github.com/wwrx   or   kisari.net
  
 This work is based on original work by P. Sereno (2010)
