@@ -1,6 +1,6 @@
 # The QLed custom widget plugin
 
-[![GitHub version](https://badge.fury.io/gh/qt/qt5.svg)](https://badge.fury.io/gh/qt/qt5)
+[![Qt version](https://badge.fury.io/gh/qt/qt5.svg)](https://badge.fury.io/gh/qt/qt5)
 
 QLed is a custom widget plugin for Qt designer. 
 
