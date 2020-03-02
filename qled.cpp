@@ -79,13 +79,14 @@ void QLed::paintEvent(QPaintEvent*)
     painter.setRenderHint(QPainter::Antialiasing, true);
 
     QString ledShape = shapes[m_shape];
-
-    qreal h, s, l;
+    QString styleTxt1, styleTxt2;
     if(m_value){
-        m_onColor.getHslF(&h, &s, &l);
+        styleTxt1 = "stop-color:" + m_onColor.darker(l1).name() + ";stop-opacity:1;";
+        styleTxt2 = "stop-color:" + m_onColor.lighter(l2).name() + ";stop-opacity:1;";
     }
     else {
-        m_offColor.getHslF(&h, &s, &l);
+        styleTxt1 = "stop-color:" + m_offColor.darker(l1).name() + ";stop-opacity:1;";
+        styleTxt2 = "stop-color:" + m_offColor.lighter(l2).name() + ";stop-opacity:1;";
     }
 
     // open svg resource load contents to qbytearray, then
@@ -98,10 +99,8 @@ void QLed::paintEvent(QPaintEvent*)
     doc.setContent(baData);
     QDomElement root = doc.documentElement();
 
-    QString styleTxt = "stop-color:" + QColor::fromHslF(h, s, l1).name() + ";stop-opacity:1;";
-    getElementById(root, "stop31").setAttribute("style", styleTxt);
-    styleTxt = "stop-color:" + QColor::fromHslF(h, s, l2).name() + ";stop-opacity:1;";
-    getElementById(root, "stop32").setAttribute("style", styleTxt);
+    getElementById(root, "stop31").setAttribute("style", styleTxt1);
+    getElementById(root, "stop32").setAttribute("style", styleTxt2);
 
     renderer->load(doc.toByteArray());
     renderer->render(&painter);
@@ -109,19 +108,19 @@ void QLed::paintEvent(QPaintEvent*)
 
 
 /*!
-  \brief setColor: this method allows to change the On/Off color simultaneously {Red,Green,Yellow,Grey,Orange,Purple,blue}
+  \brief setColor: this method allows to change the On/Off color simultaneously (the off color will be a darker shade)
   \param ledColor newColor
   \return void
 */
-void QLed::setColor(QColor newColor) {
+void QLed::setColor(QColor newColor, int factor) {
     m_onColor = newColor;
-    m_offColor = newColor;
+    m_offColor = newColor.darker(factor);
     update();
 }
 
 
 /*!
-  \brief setOnColor: this method allows to change the On color {Red,Green,Yellow,Grey,Orange,Purple,blue}
+  \brief setOnColor: this method allows to change the On color
   \param ledColor newColor
   \return void
 */
@@ -132,7 +131,7 @@ void QLed::setOnColor(QColor newColor) {
 
 
 /*!
-  \brief setOffColor: this method allows to change the Off color {Red,Green,Yellow,Grey,Orange,Purple,blue}
+  \brief setOffColor: this method allows to change the Off color
   \param ledColor newColor
   \return void
 */

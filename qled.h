@@ -74,7 +74,7 @@ public:
 
 public slots:
     void setValue(bool);
-    void setColor(QColor);
+    void setColor(QColor, int=350);
     void setOnColor(QColor);
     void setOffColor(QColor);
     void setShape(ledShape);
@@ -83,7 +83,7 @@ public slots:
 protected:
     bool m_value;
     QColor m_onColor, m_offColor;
-    const qreal l1=0.27, l2=0.66;
+    const int l1=180, l2=130; // LED 3D effect shading factors
     ledShape m_shape;
     QStringList shapes;
     void paintEvent(QPaintEvent* event);
