@@ -1,5 +1,6 @@
 # The QLed custom widget plugin
 QLed is a custom widget plugin for Qt designer. 
+![QLed example Screenshot](https://raw.githubusercontent.com/wwrx/QLed/master/example/screenshot.png)
 
 
 ## Installation
@@ -24,8 +25,8 @@ include(<your-path>/QLed/qled.pri)
 * Set up the widget using the following
 ```cpp
 widget.setShape(QLed::ledShape::<your-choice>);
-widget.setOnColor(QLed::ledColor::<your-choice>);
-widget.setOffColor(QLed::ledColor::<your-choice>);
+widget.setOnColor(QColor(<your-choice>));
+widget.setOffColor(QColor(<your-choice>));
 ```
 * Activate the LED by
 ```cpp
@@ -39,15 +40,7 @@ The available shapes are:
 * Triangle
 * Rounded
 
-The available colours are:
-* Red
-* Green
-* Yellow
-* Grey
-* Orange
-* Purple
-* Blue
-
+### See a demo ptoject in the example directory
 
 ## Tested Platforms/Versions
 This module has been tested with the following configurations
@@ -62,7 +55,9 @@ github.com/wwrx   or   kisari.net
  
 This work is based on original work by P. Sereno (2010)
 http://www.sereno-online.com
- 
+Artwork based on Jean-Victor Balin's Open Clip Art Library
+jean.victor.balin@gmail.com
+
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU Lesser General Public License
 version 3 as published by the Free Software Foundation

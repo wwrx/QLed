@@ -4,6 +4,8 @@
  *                                                                         *
  *   This work is based on original work by P. Sereno (2010)               *
  *   http://www.sereno-online.com                                          *
+ *   Artwork based on Jean-Victor Balin's Open Clip Art Library            *
+ *   jean.victor.balin@gmail.com                                           *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU Lesser General Public License           *
@@ -16,12 +18,6 @@
  *   https://www.gnu.org/licenses/lgpl-3.0.html                            *
  ***************************************************************************/
 
-#include <QColor>
-#include <QtGlobal>
-#include <QtGui>
-#include <QPolygon>
-#include <QtSvg>
-#include <QSvgRenderer>
 
 #include "qled.h"
 
@@ -30,65 +26,85 @@
   \param parent: The Parent Widget
 */
 QLed::QLed(QWidget* parent)
-  : QWidget(parent) {
-  m_value = false;
-  m_onColor = Red;
-  m_offColor = Grey;
-  m_shape = Circle;
-  shapes << ":/resources/circle_" << ":/resources/square_" << ":/resources/triang_" << ":/resources/round_";
-  colors << "red.svg" << "green.svg" << "yellow.svg" << "grey.svg" << "orange.svg" << "purple.svg" << "blue.svg";
+    : QWidget(parent) {
+    m_value = false;
+    m_onColor = QColor("green");
+    m_offColor = QColor("grey");
+    m_shape = Circle;
+    shapes << ":/resources/circle.svg" << ":/resources/square.svg" << ":/resources/triang.svg" << ":/resources/round.svg";
 
-  renderer = new QSvgRenderer();
+    renderer = new QSvgRenderer();
 }
 QLed::~QLed() {
-  delete renderer;
+    delete renderer;
 }
+
+
+/*!
+  \brief My implementation of the currently unimplemented QDomDocument::elementById
+  \param QDomElement root, QString id
+  \return QDomElement or a null element if id was not found
+*/
+QDomElement getElementById(const QDomElement root, const QString id)
+{
+    if (root.attribute("id") == id) {
+        return root.toElement();
+    }
+    QDomElement elem = root.firstChild().toElement();
+    while(!elem.isNull())
+    {
+        if (elem.attribute("id") == id) {
+            return elem.toElement();
+        }
+        if (elem.hasChildNodes()) {
+            QDomElement childElem = getElementById(elem, id);
+            if(!childElem.isNull()){
+                return childElem.toElement();
+            }
+        }
+        elem = elem.nextSibling().toElement();
+    }
+    return QDomElement();
+}
+
 
 /*!
   \brief paintEvent: painting method
   \param QPaintEvent *
   \return void
 */
-void QLed::paintEvent(QPaintEvent*) {
+void QLed::paintEvent(QPaintEvent*)
+{
+    QPainter painter(this);
+    painter.setRenderHint(QPainter::Antialiasing, true);
 
-  QString ledShapeAndColor;
-  QPainter painter(this);
-  painter.setRenderHint(QPainter::Antialiasing, true);
+    QString ledShape = shapes[m_shape];
 
-  ledShapeAndColor = shapes[m_shape];
+    qreal h, s, l;
+    if(m_value){
+        m_onColor.getHslF(&h, &s, &l);
+    }
+    else {
+        m_offColor.getHslF(&h, &s, &l);
+    }
 
-  if(m_value)
-    ledShapeAndColor.append(colors[m_onColor]);
-  else
-    ledShapeAndColor.append(colors[m_offColor]);
+    // open svg resource load contents to qbytearray, then
+    // load svg contents to xml document and edit contents
+    QFile file(ledShape);
+    file.open(QIODevice::ReadOnly);
+    QByteArray baData = file.readAll();
+    file.close();
+    QDomDocument doc;
+    doc.setContent(baData);
+    QDomElement root = doc.documentElement();
 
-  renderer->load(ledShapeAndColor);
-  renderer->render(&painter);
+    QString styleTxt = "stop-color:" + QColor::fromHslF(h, s, l1).name() + ";stop-opacity:1;";
+    getElementById(root, "stop31").setAttribute("style", styleTxt);
+    styleTxt = "stop-color:" + QColor::fromHslF(h, s, l2).name() + ";stop-opacity:1;";
+    getElementById(root, "stop32").setAttribute("style", styleTxt);
 
-  if(!m_value && m_onColor == m_offColor)
-      painter.fillRect(this->rect(), QColor(0, 0, 0, 120));
-}
-
-
-/*!
-  \brief setOnColor: this method allows to change the On color {Red,Green,Yellow,Grey,Orange,Purple,blue}
-  \param ledColor newColor
-  \return void
-*/
-void QLed::setOnColor(ledColor newColor) {
-  m_onColor = newColor;
-  update();
-}
-
-
-/*!
-  \brief setOffColor: this method allows to change the Off color {Red,Green,Yellow,Grey,Orange,Purple,blue}
-  \param ledColor newColor
-  \return void
-*/
-void QLed::setOffColor(ledColor newColor) {
-  m_offColor = newColor;
-  update();
+    renderer->load(doc.toByteArray());
+    renderer->render(&painter);
 }
 
 
@@ -97,10 +113,32 @@ void QLed::setOffColor(ledColor newColor) {
   \param ledColor newColor
   \return void
 */
-void QLed::setColor(ledColor newColor) {
-  m_onColor = newColor;
-  m_offColor = newColor;
-  update();
+void QLed::setColor(QColor newColor) {
+    m_onColor = newColor;
+    m_offColor = newColor;
+    update();
+}
+
+
+/*!
+  \brief setOnColor: this method allows to change the On color {Red,Green,Yellow,Grey,Orange,Purple,blue}
+  \param ledColor newColor
+  \return void
+*/
+void QLed::setOnColor(QColor newColor) {
+    m_onColor = newColor;
+    update();
+}
+
+
+/*!
+  \brief setOffColor: this method allows to change the Off color {Red,Green,Yellow,Grey,Orange,Purple,blue}
+  \param ledColor newColor
+  \return void
+*/
+void QLed::setOffColor(QColor newColor) {
+    m_offColor = newColor;
+    update();
 }
 
 
@@ -110,8 +148,8 @@ void QLed::setColor(ledColor newColor) {
   \return void
 */
 void QLed::setShape(ledShape newShape) {
-  m_shape = newShape;
-  update();
+    m_shape = newShape;
+    update();
 }
 
 
@@ -121,8 +159,8 @@ void QLed::setShape(ledShape newShape) {
   \return void
 */
 void QLed::setValue(bool value) {
-  m_value = value;
-  update();
+    m_value = value;
+    update();
 }
 
 
@@ -132,7 +170,7 @@ void QLed::setValue(bool value) {
   \return void
 */
 void QLed::toggleValue() {
-  m_value = !m_value;
-  update();
-  return;
+    m_value = !m_value;
+    update();
+    return;
 }
