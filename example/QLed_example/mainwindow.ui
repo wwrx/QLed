@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>492</width>
+    <height>360</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>QLed Demo</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="3" column="5">
+     <widget class="QLed" name="widget_20" native="true"/>
+    </item>
+    <item row="4" column="3">
+     <widget class="QLed" name="widget_25" native="true"/>
+    </item>
+    <item row="3" column="4">
+     <widget class="QLed" name="widget_19" native="true"/>
+    </item>
+    <item row="0" column="0" colspan="2">
+     <widget class="QPushButton" name="pushButton_setup">
+      <property name="text">
+       <string>Setup</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="4">
+     <widget class="QLed" name="widget_26" native="true"/>
+    </item>
+    <item row="2" column="2">
+     <widget class="QLed" name="widget_10" native="true"/>
+    </item>
+    <item row="4" column="6">
+     <widget class="QLed" name="widget_28" native="true"/>
+    </item>
+    <item row="2" column="1">
+     <widget class="QLed" name="widget_9" native="true"/>
+    </item>
+    <item row="2" column="5">
+     <widget class="QLed" name="widget_13" native="true"/>
+    </item>
+    <item row="3" column="0">
+     <widget class="QLed" name="widget_15" native="true"/>
+    </item>
+    <item row="3" column="6">
+     <widget class="QLed" name="widget_21" native="true"/>
+    </item>
+    <item row="4" column="2">
+     <widget class="QLed" name="widget_24" native="true"/>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLed" name="widget_1" native="true"/>
+    </item>
+    <item row="1" column="4">
+     <widget class="QLed" name="widget_5" native="true"/>
+    </item>
+    <item row="3" column="2">
+     <widget class="QLed" name="widget_17" native="true"/>
+    </item>
+    <item row="4" column="1">
+     <widget class="QLed" name="widget_23" native="true"/>
+    </item>
+    <item row="2" column="4">
+     <widget class="QLed" name="widget_12" native="true"/>
+    </item>
+    <item row="3" column="1">
+     <widget class="QLed" name="widget_16" native="true"/>
+    </item>
+    <item row="2" column="0">
+     <widget class="QLed" name="widget_8" native="true"/>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLed" name="widget_2" native="true"/>
+    </item>
+    <item row="3" column="3">
+     <widget class="QLed" name="widget_18" native="true"/>
+    </item>
+    <item row="1" column="3">
+     <widget class="QLed" name="widget_4" native="true"/>
+    </item>
+    <item row="4" column="5">
+     <widget class="QLed" name="widget_27" native="true"/>
+    </item>
+    <item row="0" column="5" colspan="2">
+     <widget class="QPushButton" name="pushButton_toggle">
+      <property name="text">
+       <string>Toggle</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="6">
+     <widget class="QLed" name="widget_7" native="true"/>
+    </item>
+    <item row="2" column="3">
+     <widget class="QLed" name="widget_11" native="true"/>
+    </item>
+    <item row="2" column="6">
+     <widget class="QLed" name="widget_14" native="true"/>
+    </item>
+    <item row="1" column="2">
+     <widget class="QLed" name="widget_3" native="true"/>
+    </item>
+    <item row="1" column="5">
+     <widget class="QLed" name="widget_6" native="true"/>
+    </item>
+    <item row="4" column="0">
+     <widget class="QLed" name="widget_22" native="true"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuba29r">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>492</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="stat32usbar"/>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QLed</class>
+   <extends>QWidget</extends>
+   <header>qled.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
