@@ -37,6 +37,7 @@ void MainWindow::on_pushButton_setup_clicked()
             //item->setOnColor(colors.at(col));
             //item->setOffColor(QColor("grey"));
             item->setValue(false);
+            item->setClickable(true);
         }
     }
 }

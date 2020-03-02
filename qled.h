@@ -47,18 +47,22 @@ class MY_PLUGIN_EXPORT QLed : public QWidget {
 
     Q_ENUMS (ledShape)
     Q_PROPERTY(bool value READ value WRITE setValue)
+    Q_PROPERTY(bool clickable READ clickable WRITE setClickable)
     Q_PROPERTY(QColor color READ color WRITE setColor)
     Q_PROPERTY(QColor onColor READ onColor WRITE setOnColor)
     Q_PROPERTY(QColor offColor READ offColor WRITE setOffColor)
     Q_PROPERTY(ledShape shape READ shape WRITE setShape)
 
 public:
+    enum ledShape { Circle = 0, Square, Triangle, Rounded};
     QLed(QWidget* parent = 0);
     virtual ~QLed();
     bool value() const {
         return m_value;
     }
-    enum ledShape { Circle = 0, Square, Triangle, Rounded};
+    bool clickable() const {
+        return m_clickable;
+    }
     QColor color() const {
         return m_onColor;
     }
@@ -74,6 +78,7 @@ public:
 
 public slots:
     void setValue(bool);
+    void setClickable(bool);
     void setColor(QColor, int=350);
     void setOnColor(QColor);
     void setOffColor(QColor);
@@ -82,11 +87,13 @@ public slots:
 
 protected:
     bool m_value;
+    bool m_clickable;
     QColor m_onColor, m_offColor;
     const int l1=180, l2=130; // LED 3D effect shading factors
     ledShape m_shape;
     QStringList shapes;
-    void paintEvent(QPaintEvent* event);
+    void paintEvent(QPaintEvent* event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
 
 private:
     QSvgRenderer* renderer ;

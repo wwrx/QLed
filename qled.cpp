@@ -28,6 +28,7 @@
 QLed::QLed(QWidget* parent)
     : QWidget(parent) {
     m_value = false;
+    m_clickable = false;
     m_onColor = QColor("green");
     m_offColor = QColor("grey");
     m_shape = Circle;
@@ -108,8 +109,21 @@ void QLed::paintEvent(QPaintEvent*)
 
 
 /*!
+  \brief mouseReleaseEvent: click method
+  \param QMouseEvent *
+  \return void
+*/
+void QLed::mouseReleaseEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton && m_clickable) {
+        toggleValue();
+    }
+}
+
+
+/*!
   \brief setColor: this method allows to change the On/Off color simultaneously (the off color will be a darker shade)
-  \param ledColor newColor
+  \param QColor newColor, int factor
   \return void
 */
 void QLed::setColor(QColor newColor, int factor) {
@@ -121,7 +135,7 @@ void QLed::setColor(QColor newColor, int factor) {
 
 /*!
   \brief setOnColor: this method allows to change the On color
-  \param ledColor newColor
+  \param QColor newColor
   \return void
 */
 void QLed::setOnColor(QColor newColor) {
@@ -132,7 +146,7 @@ void QLed::setOnColor(QColor newColor) {
 
 /*!
   \brief setOffColor: this method allows to change the Off color
-  \param ledColor newColor
+  \param QColor newColor
   \return void
 */
 void QLed::setOffColor(QColor newColor) {
@@ -143,7 +157,7 @@ void QLed::setOffColor(QColor newColor) {
 
 /*!
   \brief setShape: this method allows to change the led shape {Circle,Square,Triangle,Rounded rectangle}
-  \param ledColor newColor
+  \param ledShape newShape
   \return void
 */
 void QLed::setShape(ledShape newShape) {
@@ -154,7 +168,7 @@ void QLed::setShape(ledShape newShape) {
 
 /*!
   \brief setValue: this method allows to set the led value {true,false}
-  \param ledColor newColor
+  \param bool value
   \return void
 */
 void QLed::setValue(bool value) {
@@ -164,12 +178,20 @@ void QLed::setValue(bool value) {
 
 
 /*!
+  \brief setClickable: this method allows to set the led clickable mode {true,false}
+  \param bool clickable
+  \return void
+*/
+void QLed::setClickable(bool clickable) {
+    m_clickable = clickable;
+}
+
+
+/*!
   \brief toggleValue: this method toggles the led value
-  \param ledColor newColor
   \return void
 */
 void QLed::toggleValue() {
     m_value = !m_value;
     update();
-    return;
 }

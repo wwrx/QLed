@@ -25,13 +25,17 @@ include(<your-path>/QLed/qled.pri)
 * Set up the widget using the following
 ```cpp
 widget.setShape(QLed::ledShape::<your-choice>);
-widget.setOnColor(QColor(<your-choice>));
-widget.setOffColor(QColor(<your-choice>));
+widget.setColor(QColor(<your-choice>));
 ```
 * Activate the LED by
 ```cpp
 widget.toggleValue();
 ```
+* You can enable clickable mode by
+```cpp
+widget.setClickable(true);
+```
+This way you can toggle the LED by clicking on it.
 
 ------------------------------------------------------------------------------
 The available shapes are:
