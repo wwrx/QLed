@@ -1,7 +1,7 @@
 # The QLed custom widget plugin
-QLed is a custom widget plugin for Qt designer. 
-![QLed example Screenshot](https://raw.githubusercontent.com/wwrx/QLed/master/example/screenshot.png)
+QLed is a custom widget plugin for Qt designer.
 
+![QLed example Screenshot](https://github.com/wwrx/QLed/raw/master/example/screenshot.png)
 
 ## Installation
 1. Clone into a working directory
@@ -44,7 +44,7 @@ The available shapes are:
 * Triangle
 * Rounded
 
-### See a demo ptoject in the example directory
+### See a demo project in the example directory
 
 ## Tested Platforms/Versions
 This module has been tested with the following configurations
@@ -59,6 +59,7 @@ github.com/wwrx   or   kisari.net
  
 This work is based on original work by P. Sereno (2010)
 http://www.sereno-online.com
+
 Artwork based on Jean-Victor Balin's Open Clip Art Library
 jean.victor.balin@gmail.com
 
