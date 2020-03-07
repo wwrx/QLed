@@ -3,6 +3,7 @@ QLed is a custom widget plugin for Qt designer.
 
 ![QLed example Screenshot](https://github.com/wwrx/QLed/raw/master/example/screenshot.png)
 
+
 ## Installation
 1. Clone into a working directory
 2. Type qmake <qledplugin.pro>
@@ -15,7 +16,7 @@ QLed is a custom widget plugin for Qt designer.
 ## Usage
 ### Qt Creator
 * Add the following to your .pro file.
-(replace <your-path> with the actual path to the QLed widget files)
+(replace &lt;your-path&gt; with the actual path to the QLed widget files)
 ```cpp
 INCLUDEPATH += <your-path>/QLed
 include(<your-path>/QLed/qled.pri)
@@ -45,6 +46,7 @@ The available shapes are:
 * Rounded
 
 ### See a demo project in the example directory
+
 
 ## Tested Platforms/Versions
 This module has been tested with the following configurations

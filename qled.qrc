@@ -4,5 +4,6 @@
         <file>resources/square.svg</file>
         <file>resources/triang.svg</file>
         <file>resources/round.svg</file>
+        <file>resources/icon.png</file>
     </qresource>
 </RCC>
