@@ -37,6 +37,12 @@ widget.toggleValue();
 widget.setClickable(true);
 ```
 This way you can toggle the LED by clicking on it.
+* You can enable blinking mode by
+```cpp
+widget.setTimeout(<timeout-in-msec>);
+```
+The LED will blink with the given period while turned on.
+You can turn this off by setting the timeout to 0.
 
 ------------------------------------------------------------------------------
 The available shapes are:

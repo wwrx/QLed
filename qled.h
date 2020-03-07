@@ -48,6 +48,7 @@ class MY_PLUGIN_EXPORT QLed : public QWidget {
     Q_ENUMS (ledShape)
     Q_PROPERTY(bool value READ value WRITE setValue)
     Q_PROPERTY(bool clickable READ clickable WRITE setClickable)
+    Q_PROPERTY(uint timeout READ timeout WRITE setTimeout)
     Q_PROPERTY(QColor color READ color WRITE setColor)
     Q_PROPERTY(QColor onColor READ onColor WRITE setOnColor)
     Q_PROPERTY(QColor offColor READ offColor WRITE setOffColor)
@@ -62,6 +63,9 @@ public:
     }
     bool clickable() const {
         return m_clickable;
+    }
+    uint timeout() const {
+        return m_timer.interval();
     }
     QColor color() const {
         return m_onColor;
@@ -79,17 +83,23 @@ public:
 public slots:
     void setValue(bool);
     void setClickable(bool);
+    void setTimeout(uint);
     void setColor(QColor, int=350);
     void setOnColor(QColor);
     void setOffColor(QColor);
     void setShape(ledShape);
     void toggleValue();
 
+private slots:
+    void blink();
+
 protected:
+    const int l1=180, l2=130; // LED 3D effect shading factors
     bool m_value;
     bool m_clickable;
+    bool m_blink;
+    QTimer m_timer;
     QColor m_onColor, m_offColor;
-    const int l1=180, l2=130; // LED 3D effect shading factors
     ledShape m_shape;
     QStringList shapes;
     void paintEvent(QPaintEvent* event) override;

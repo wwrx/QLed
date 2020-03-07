@@ -29,13 +29,17 @@ QLed::QLed(QWidget* parent)
     : QWidget(parent) {
     m_value = false;
     m_clickable = false;
+    m_blink = false;
     m_onColor = QColor("green");
     m_offColor = QColor("grey");
     m_shape = Circle;
     shapes << ":/resources/circle.svg" << ":/resources/square.svg" << ":/resources/triang.svg" << ":/resources/round.svg";
 
+    connect(&m_timer, SIGNAL(timeout()), this, SLOT(blink()));
+
     renderer = new QSvgRenderer();
 }
+
 QLed::~QLed() {
     delete renderer;
 }
@@ -81,7 +85,7 @@ void QLed::paintEvent(QPaintEvent*)
 
     QString ledShape = shapes[m_shape];
     QString styleTxt1, styleTxt2;
-    if(m_value){
+    if(m_value && !m_blink){
         styleTxt1 = "stop-color:" + m_onColor.darker(l1).name() + ";stop-opacity:1;";
         styleTxt2 = "stop-color:" + m_onColor.lighter(l2).name() + ";stop-opacity:1;";
     }
@@ -120,6 +124,42 @@ void QLed::mouseReleaseEvent(QMouseEvent *event)
     }
 }
 
+
+/*!
+  \brief setValue: this method allows to set the led value {true,false}
+  \param bool value
+  \return void
+*/
+void QLed::setValue(bool value) {
+    m_value = value;
+    update();
+}
+
+
+/*!
+  \brief setClickable: this method allows to set the led clickable mode {true,false}
+  \param bool clickable
+  \return void
+*/
+void QLed::setClickable(bool clickable) {
+    m_clickable = clickable;
+}
+
+
+/*!
+  \brief setTimeout: this method allows to set the frequency of the blinking mode
+  \param int timeout
+  \return void
+*/
+void QLed::setTimeout(uint timeout) {
+    if(timeout == 0){
+        m_timer.stop();
+        m_blink = false;
+    }
+    else {
+        m_timer.start(timeout);
+    }
+}
 
 /*!
   \brief setColor: this method allows to change the On/Off color simultaneously (the off color will be a darker shade)
@@ -167,27 +207,6 @@ void QLed::setShape(ledShape newShape) {
 
 
 /*!
-  \brief setValue: this method allows to set the led value {true,false}
-  \param bool value
-  \return void
-*/
-void QLed::setValue(bool value) {
-    m_value = value;
-    update();
-}
-
-
-/*!
-  \brief setClickable: this method allows to set the led clickable mode {true,false}
-  \param bool clickable
-  \return void
-*/
-void QLed::setClickable(bool clickable) {
-    m_clickable = clickable;
-}
-
-
-/*!
   \brief toggleValue: this method toggles the led value
   \return void
 */
@@ -195,3 +214,15 @@ void QLed::toggleValue() {
     m_value = !m_value;
     update();
 }
+
+
+/*!
+  \brief Internal function to operate blinking mode
+  \return void
+*/
+void QLed::blink(){
+    m_blink = !m_blink;
+    update();
+}
+
+

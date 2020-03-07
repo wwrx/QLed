@@ -53,4 +53,15 @@ void MainWindow::on_pushButton_toggle_clicked()
     }
 }
 
+void MainWindow::on_pushButton_blink_clicked()
+{
+    QGridLayout *layout = qobject_cast<QGridLayout*>(this->centralWidget()->layout());
+    for(int row=1; row<layout->rowCount(); row++){
+        for(int col=0; col<layout->columnCount(); col++){
+            QLed *item = qobject_cast<QLed*>((layout->itemAtPosition(row, col)->widget()));
+            item->setTimeout(500);
+        }
+    }
+}
+
 

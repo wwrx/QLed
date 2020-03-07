@@ -113,6 +113,13 @@
     <item row="4" column="0">
      <widget class="QLed" name="widget_22" native="true"/>
     </item>
+    <item row="0" column="3">
+     <widget class="QPushButton" name="pushButton_blink">
+      <property name="text">
+       <string>Blink</string>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menuba29r">
